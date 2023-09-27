@@ -2,19 +2,43 @@
 #define BLOCK_HPP
 
 #include<iostream>
-#include<map>
+#include<vector>
 
 class Block{
-private:
-    std::map<unsigned int, unsigned int> block;
+protected:
+    std::vector<std::pair<int, int>> position_block;
     char block_symbol;
+    unsigned int width, height;
+    bool check_collision() const;
 public:
-    void rotate();
-    void move();
+    virtual void rotate() = 0;
+    void move_right();
+    void move_left();
     void value_fall();
+    std::vector<std::pair<int, int>> get_position_block() const;
 
-    Block(char block_symbol);
+    Block(char block_symbol, unsigned int width, unsigned int height);
     ~Block();
+};
+
+class I_Block : public Block{
+    void rotate() override;
+};
+
+class L_Block : public Block{
+    void rotate() override;
+};
+
+class O_Block : public Block{
+    void rotate() override;
+};
+
+class T_Block : public Block{
+    void rotate() override;
+};
+
+class Z_Block : public Block{
+    void rotate() override;
 };
 
 #endif

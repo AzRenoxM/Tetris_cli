@@ -23,7 +23,6 @@ void Tetris::update(){
             this->border[index][jndex] = this->border_symbol;
          }
       }
-   
    }
    
 }
