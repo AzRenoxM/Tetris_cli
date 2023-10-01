@@ -30,11 +30,11 @@ void Tetris::draw(){
    std::system("clear");
    for(size_t index{0}; index < height; index++){
       for(size_t inner_index{0}; inner_index < width; inner_index++){
-         for(size_t block_index{0}; block_index < this->block_list.size(); block_index++){
-            for(size_t block_inner_index{0}; block_inner_index < this->block_list[block_index]->)
-               if()
-         }
-         else std::cout << border[index][inner_index];
+         // for(size_t block_index{0}; block_index < this->block_list.size(); block_index++){
+         //    for(size_t block_inner_index{0}; block_inner_index < this->block_list[block_index]->)
+         //       if()
+         // }
+         std::cout << border[index][inner_index];
       }
       std::cout << std::endl;
    }
