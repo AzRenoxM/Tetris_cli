@@ -1,10 +1,11 @@
 #include"Block.hpp"
 
-bool Block::check_collision() const {
+bool Block::check_collision(){
 	for(size_t index{0}; index < this->position_block.size(); index++){
 		if(this->position_block[index].first - 1 == 0 || this->position_block[index].first + 1 == this->width - 1){
 			return true;
 		} else if(this->position_block[index].second + 1 == this->height - 1){
+			this->stop_from_fall();
 			return true;
 		}
 	}
@@ -89,7 +90,7 @@ Block::~Block(){}
 	
 //! I_Block
 
-I_Block::I_Block(std::vector<std::pair<int, int>> position_block, char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
+I_Block::I_Block(char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
 	: Block(block_symbol, width, height, stop_block, eliminate_object) {
 		for (size_t index{1}; index <= 4; index++){
 			std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2, index);
@@ -106,7 +107,7 @@ I_Block::~I_Block(){
 
 //! L_Block
 
-L_Block::L_Block(std::vector<std::pair<int, int>> position_block, char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
+L_Block::L_Block(char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
 	: Block(block_symbol, width, height, stop_block, eliminate_object) {
 		for(size_t index{1}; index <= 3; index++){
 			std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2, index);
@@ -124,11 +125,7 @@ L_Block::~L_Block(){
 
 //! O_Block
 
-void O_Block::rotate(){
-	return;
-}	
-
-O_Block::O_Block(std::vector<std::pair<int, int>> position_block, char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
+O_Block::O_Block(char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
 	: Block(block_symbol, width, height, stop_block, eliminate_object) {
 		for(size_t index{1}; index <= 2; index++){
 			std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2, index);
@@ -146,7 +143,7 @@ O_Block::~O_Block(){
 
 //! T_Block
 
-T_Block::T_Block(std::vector<std::pair<int, int>> position_block, char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
+T_Block::T_Block(char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
 	: Block(block_symbol, width, height, stop_block, eliminate_object) {
 		for(int index{-1}; index <= 1; index++){
 			std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2 + index, 1);
@@ -165,7 +162,7 @@ T_Block::~T_Block(){
 
 //! Z_Block
 
-Z_Block::Z_Block(std::vector<std::pair<int, int>> position_block, char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
+Z_Block::Z_Block(char block_symbol, unsigned int width, unsigned int height, bool stop_block, bool eliminate_object)
 	: Block(block_symbol, width, height, stop_block, eliminate_object) {
 
 		std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2, 1);
