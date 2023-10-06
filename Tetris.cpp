@@ -52,7 +52,12 @@ void Tetris::draw(){
    } else {
       std::cout << "Stop Block value: " << this->block_list.back()->stop_block << std::endl;
    } 
-   std::system("sleep 1");
+   if(!this->block_list.empty()){
+      for(size_t index{0}; index < this->block_list.back()->position_block.size(); index++){
+         std::cout << this->block_list.back()->position_block[index].first << " " << this->block_list.back()->position_block[index].second << std::endl;
+      }
+   }
+   std::system("sleep 2");
 }
 
 int Tetris::run(){
@@ -64,34 +69,37 @@ int Tetris::run(){
    return 1;
 }
 
-void Tetris::update(){
-   //! create random block if last block stop_block is true, or if it empty, or if it is at the bottom
-   if(!this->block_list.empty()){
-      if(this->block_list.back()->stop_block){
-         this->block_list.push_back(new I_Block(this->block_symbol, this->width, this->height, false, false)); //! I'm initializating a virtual class pure error
-         std::cout << this->block_list[this->block_list.size() - 1]->stop_block << std::endl;
-         std::cout << "test 1" << std::endl;
-      } else if(this->check_collision_block() && !this->block_list.back()->stop_block){
-         this->block_list.back()->stop_block = true;
-         std::cout << "test 2" << std::endl;
+//TODO random blocks 
+//TODO input
+//TODO score with gameover if the block reach the top
+//TODO check collision with other blocks X plane
+//TODO line clear + points
 
+void Tetris::update(){
+   if(!this->block_list.empty()){ 
+      if(this->block_list.back()->stop_block){ 
+         this->block_list.push_back(new I_Block(this->block_symbol, this->width, this->height, false, false));
+         std::cout << "the last block is stop block" << this->block_list[this->block_list.size() - 1]->stop_block << std::endl;
+      } else if(this->check_collision_block() && !this->block_list.back()->stop_block){ 
+         this->block_list.back()->stop_block = true;
       } else {
          this->block_list.back()->move_fall();
-
-         std::cout << "test 3" << std::endl;
-
       }
    } else {
       this->block_list.push_back(new I_Block(this->block_symbol, this->width, this->height, 0, 0));
-      std::cout << "test 4" << std::endl;
-
    }
 }
 
 bool Tetris::check_collision_block(){
-   // this->block_list
-   //! make an algorithm to check if the block is colliding with another block
-   
+   for(size_t index{0}; index < this->block_list.size() - 1; index++){
+      for(size_t inner_index{0}; inner_index < this->block_list[index]->position_block.size(); inner_index++){
+         for(size_t block_index{0}; block_index < this->block_list.back()->position_block.size(); block_index++){
+            if(this->block_list.back()->position_block[block_index].second == this->block_list[index]->position_block[inner_index].second - 1 && this->block_list.back()->position_block[block_index].first == this->block_list[index]->position_block[inner_index].first){
+               return true;
+            }
+         }
+      }
+   }
    return false;
 }
    

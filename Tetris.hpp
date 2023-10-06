@@ -3,6 +3,7 @@
 
 #include<cstdlib>
 #include<iostream>
+#include<array>
 #include "Block.hpp"
 
 class Tetris{
