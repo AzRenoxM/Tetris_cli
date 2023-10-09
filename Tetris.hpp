@@ -4,6 +4,8 @@
 #include<cstdlib>
 #include<iostream>
 #include<array>
+#include<ctime>
+#include<cstdlib>
 #include "Block.hpp"
 
 class Tetris{
@@ -14,6 +16,8 @@ private:
     unsigned int width, height, score;
     bool gameover;
     Block *block;
+
+    Block* create_block();
     
 public:
     void draw();
@@ -21,7 +25,7 @@ public:
     int input();
     int run();
 
-    bool check_collision_block(); //TODO check collision between blocks for now it's only for border
+    bool check_collision_block(); 
     
 
     Tetris(int width = 15, int height = 15, int score = 0, bool gameover = 0, char border_symbol = '#', char empty_space = ' ', char block_symbol = 'X');

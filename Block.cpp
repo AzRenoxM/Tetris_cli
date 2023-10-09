@@ -112,9 +112,12 @@ L_Block::L_Block(char block_symbol, unsigned int width, unsigned int height, boo
 		for(size_t index{1}; index <= 3; index++){
 			std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2, index);
 			this->position_block.push_back(*pointer_block);
+			std::cout << "function " << this->position_block.back().first << ", " << this->position_block.back().second << std::endl;
 		}
 		std::pair<int, int> *pointer_block = new std::pair<int, int>(this->width / 2 + 1, 3);
 		this->center_block = 1;
+		std::cout << "function " << this->position_block.back().first << ", " << this->position_block.back().second << std::endl;
+		std::cout << "index size: " << this->position_block.size() << std::endl;
 	}
 
 L_Block::~L_Block(){
